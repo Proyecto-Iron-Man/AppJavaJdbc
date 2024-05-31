@@ -68,4 +68,62 @@ public class CategoryDao {
 
         return categories;
     }
+
+    public Category findById(Long id) throws Exception {
+        // Attributes
+        Category category = null;
+        String sqlQuery;
+
+        // Process
+        sqlQuery = "select id, name, description, url_key, state, created_at, updated_at from categories where id = ?";
+
+        try (
+                // Get connection
+                Connection connection = new ConnectionCore().getConnection();
+
+                // Prepare statement
+                PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
+
+
+        ) {
+
+            // set parameter
+            preparedStatement.setLong(1, id);
+
+            try (
+                    // Execute query
+                    ResultSet resultSet = preparedStatement.executeQuery();
+            ) {
+
+                // Set data
+                if (resultSet.next()) {
+                    category = new Category();
+
+                    category.setId(resultSet.getLong("id"));
+                    category.setName(resultSet.getString("name"));
+                    category.setDescription(resultSet.getString("description"));
+                    category.setUrlKey(resultSet.getString("url_key"));
+                    category.setState(resultSet.getString("state"));
+
+                    Timestamp createdAt = resultSet.getTimestamp("created_at");
+                    if (createdAt != null) {
+                        category.setCreatedAt(createdAt.toLocalDateTime());
+                    }
+
+                    Timestamp updatedAt = resultSet.getTimestamp("updated_at");
+                    if (updatedAt != null) {
+                        category.setUpdatedAt(updatedAt.toLocalDateTime());
+                    }
+
+                }
+
+            }
+
+
+        }
+
+
+        // Result
+        return category;
+    }
 }

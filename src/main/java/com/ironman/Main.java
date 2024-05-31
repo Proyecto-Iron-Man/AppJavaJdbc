@@ -5,6 +5,7 @@ import com.ironman.dao.impl.CategoryDaoImpl;
 import com.ironman.dao.impl.CategoryStoreImpl;
 import com.ironman.entity.Category;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -14,7 +15,7 @@ public class Main {
 
         try {
 
-            CategoryDao categoryDao = new CategoryStoreImpl();
+            CategoryDao categoryDao = new CategoryDaoImpl();
 
             List<Category> categories = categoryDao.findAll();
 
@@ -40,6 +41,31 @@ public class Main {
 //            System.out.println("Url key: " + category.getUrlKey());
 //            System.out.println("State: " + category.getState());
 //            System.out.println("Created at: " + category.getCreatedAt());
+
+//            Category category = new Category();
+//            category.setName("Categoria A2");
+//            category.setDescription("Sin detalles");
+//            category.setUrlKey("categoria-A2");
+//            category.setState("A");
+//            category.setCreatedAt(LocalDateTime.now());
+//
+//            int result = categoryDao.create(category);
+//
+//            System.out.println("Create: "+ result);
+
+
+//            Category category = new Category();
+//            category.setName("Categoria A");
+//            category.setDescription("Sin detalles");
+//            category.setUrlKey("categoria-a");;
+//            category.setUpdatedAt(LocalDateTime.now());
+//
+//            int result = categoryDao.update(100L,category);
+//
+//            System.out.println("Update: "+ result);
+
+//            categoryDao.deleteById(101L);
+//            System.out.println("deleteById: ");
 
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());

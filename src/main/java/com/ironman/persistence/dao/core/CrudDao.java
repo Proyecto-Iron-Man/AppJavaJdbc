@@ -1,4 +1,4 @@
-package com.ironman.dao.core;
+package com.ironman.persistence.dao.core;
 
 import java.util.List;
 

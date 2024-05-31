@@ -1,8 +1,8 @@
-package com.ironman.persistence.entity;
+package com.ironman.application.dto.category;
 
 import java.time.LocalDateTime;
 
-public class Category {
+public class CategoryDto {
     // Attributes
     private Long id;
     private String name;
@@ -12,11 +12,12 @@ public class Category {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    // Constructors
-    public Category() {
+    // constructor
+
+    public CategoryDto() {
     }
 
-    public Category(Long id, String name, String description, String urlKey, String state, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public CategoryDto(Long id, String name, String description, String urlKey, String state, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -26,7 +27,9 @@ public class Category {
         this.updatedAt = updatedAt;
     }
 
-    // Encapsulations
+
+    // encapsulates
+
 
     public Long getId() {
         return id;

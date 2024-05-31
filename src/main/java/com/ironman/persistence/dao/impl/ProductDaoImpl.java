@@ -1,7 +1,7 @@
-package com.ironman.dao.impl;
+package com.ironman.persistence.dao.impl;
 
-import com.ironman.dao.ProductDao;
-import com.ironman.entity.Product;
+import com.ironman.persistence.dao.ProductDao;
+import com.ironman.persistence.entity.Product;
 
 import java.util.List;
 

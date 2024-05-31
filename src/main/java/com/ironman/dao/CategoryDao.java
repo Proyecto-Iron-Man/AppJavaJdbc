@@ -18,24 +18,24 @@ public class CategoryDao {
         Category category;
         String sqlQuery;
 
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
 
         // process
-        try {
 
-            // sql query
-            sqlQuery = "select id, name, description, url_key, state, created_at, updated_at from categories";
+        // sql query
+        sqlQuery = "select id, name, description, url_key, state, created_at, updated_at from categories";
 
-            // Get connection
-            connection = new ConnectionCore().getConnection();
+        try (
+                // Get connection
+                Connection connection = new ConnectionCore().getConnection();
 
-            // Prepare statement
-            preparedStatement = connection.prepareStatement(sqlQuery);
+                // Prepare statement
+                PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
 
-            // Execute query
-            resultSet = preparedStatement.executeQuery();
+                // Execute query
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+        ) {
+
 
             // Set data
             while (resultSet.next()) {
@@ -48,7 +48,7 @@ public class CategoryDao {
                 category.setState(resultSet.getString("state"));
 
                 Timestamp createdAt = resultSet.getTimestamp("created_at");
-                if(createdAt != null) {
+                if (createdAt != null) {
                     category.setCreatedAt(createdAt.toLocalDateTime());
                 }
 
@@ -63,29 +63,6 @@ public class CategoryDao {
 
         } catch (Exception e) {
             System.out.println("CategoryDao::findAll::Error: " + e.getMessage());
-        }
-        finally {
-
-            try {
-
-                if(resultSet != null && !resultSet.isClosed()){
-                   resultSet.close();
-                }
-
-                if(preparedStatement != null && !preparedStatement.isClosed()) {
-                    preparedStatement.close();
-                }
-
-                if(connection != null && !connection.isClosed()) {
-                    connection.close();
-                }
-
-            }catch (Exception e){
-                System.out.println("CategoryDao::findAll::Finally: " + e.getMessage());
-            }
-
-
-
         }
 
 
